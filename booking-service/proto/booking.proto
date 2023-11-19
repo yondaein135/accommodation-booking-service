@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package booking;
+
+option go_package = "accommodation-booking-system/booking-service/proto";
+import "google/protobuf/timestamp.proto";
+
+
+message CancelBookingRequest{
+  uint64 user_id = 1;
+  uint64 booking_id = 2;
+}
+
+message CancelBookingResponse{
+  bool is_cancelled = 1;
+}
+
+message CreateBookingRequest {
+  uint64 user_id = 1;
+  uint64 room_id = 2;
+  google.protobuf.Timestamp start_date = 3;
+  google.protobuf.Timestamp end_date = 4;
+  float price = 5;
+  uint64 occupants = 6;
+}
+
+message CreateBookingResponse {
+  Booking booking = 1;
+}
+
+message GetBookingHistoryRequest {
+  uint64 user_id = 1;
+  google.protobuf.Timestamp start_date = 2;
+  google.protobuf.Timestamp end_date = 3;
+  google.protobuf.Timestamp booking_date = 4;
+  float price_min = 5;
+  float price_max = 6;
+
+}
+
+message GetBookingHistoryResponse {
+  repeated Booking bookings = 1;
+}
+
+message Booking {
+  uint64 id = 1;
+  uint64 user_id = 2;
+  uint64 room_id = 3;
+  google.protobuf.Timestamp start_date = 4;
+  google.protobuf.Timestamp end_date = 5;
+  float price = 6;
+  uint64 occupants = 7;
+  bool is_paid = 8;
+  bool is_cancelled = 9;
+}
+
+message CheckRoomAvailabilityRequest {
+  uint64 room_id = 1;
+  google.protobuf.Timestamp start_date = 2;
+  google.protobuf.Timestamp end_date = 3;
+}
+
+message CheckRoomAvailabilityResponse {
+  bool is_available = 1;
+}
+
+message UpdatePaymentStatusRequest {
+  uint64 booking_id = 1;
+  bool is_paid = 2;
+}
+
+message UpdatePaymentStatusResponse {
+  bool success = 1;
+}
+
+
+service BookingService {
+  rpc CreateBooking (CreateBookingRequest) returns (CreateBookingResponse);
+
+  rpc GetBookingHistory (GetBookingHistoryRequest) returns (GetBookingHistoryResponse);
+
+  rpc CancelBooking (CancelBookingRequest) returns (CancelBookingResponse);
+
+  rpc CheckRoomAvailability (CheckRoomAvailabilityRequest) returns (CheckRoomAvailabilityResponse);
+
+  rpc UpdatePaymentStatus(UpdatePaymentStatusRequest) returns (UpdatePaymentStatusResponse);
+
+}

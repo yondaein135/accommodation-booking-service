@@ -1,0 +1,8 @@
+database:
+  host: abs-db
+  port: 3306
+  user: accomo
+  password: password
+  name: abs
+server:
+  port: 50051

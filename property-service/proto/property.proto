@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package property;
+
+option go_package = "accommodation-booking-system/property-service/proto";
+
+import     "google/protobuf/timestamp.proto";
+
+
+message Property {
+  uint64 id = 1;
+  string name = 2;
+  string location = 3;
+  repeated Room rooms = 4;
+}
+
+message Room {
+  uint64 id = 1;
+  uint64 property_id = 2;
+  string type = 3;
+  int32 capacity = 4;
+  float price = 5;
+}
+
+message ListPropertiesRequest {
+  google.protobuf.Timestamp desired_start_date = 1;
+  google.protobuf.Timestamp desired_end_date = 2;
+  float price_min = 3;
+  float price_max = 4;
+}
+
+message ListPropertiesResponse {
+  repeated Property properties = 1;
+}
+
+service PropertyService {
+  rpc ListProperties (ListPropertiesRequest) returns (ListPropertiesResponse);
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package user;
+option go_package = "accommodation-booking-system/user-service/proto";
+
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+message CreateUserResponse {
+  User user = 1;
+}
+
+message GetUserRequest {
+  uint64 user_id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+message User {
+  uint64 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message BillingAddress {
+  uint64 id = 1;
+  uint64 user_id = 2;
+  string address_line1 = 3;
+  string address_line2 = 4;
+  string city = 5;
+  string state = 6;
+  string country = 7;
+  string postal_code = 8;
+}
+
+message UpdateBillingAddressRequest {
+  uint64 user_id = 1;
+  BillingAddress billing_address = 2;
+}
+
+message UpdateBillingAddressResponse {
+  bool success = 1;
+}
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+
+  rpc UpdateBillingAddress(UpdateBillingAddressRequest) returns (UpdateBillingAddressResponse);
+}

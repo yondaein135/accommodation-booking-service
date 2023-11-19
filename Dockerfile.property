@@ -1,0 +1,17 @@
+FROM golang:1.21.2
+
+WORKDIR /app
+
+COPY property-service/go.mod property-service/go.sum ./
+
+RUN go mod download
+
+COPY shared/proto/ ./proto/
+
+COPY property-service/ ./
+
+RUN go build -o main .
+
+EXPOSE 50051
+
+CMD ["/app/main"]

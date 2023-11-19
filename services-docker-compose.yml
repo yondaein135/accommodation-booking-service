@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.user
+    ports:
+      - "50051:50051"
+    networks:
+      - abs-network
+
+  booking-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.booking
+    ports:
+      - "50052:50051"
+    networks:
+      - abs-network
+
+  property-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.property
+    ports:
+      - "50053:50051"
+    networks:
+      - abs-network
+
+  payment-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.payment
+    ports:
+      - "50054:50051"
+    networks:
+      - abs-network
+
+networks:
+  abs-network:
+    external: true

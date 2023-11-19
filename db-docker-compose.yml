@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  abs-db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: accomo
+      MYSQL_DATABASE: abs
+      MYSQL_USER: accomo
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    networks:
+      - abs-network
+
+networks:
+  abs-network:
+    external: true

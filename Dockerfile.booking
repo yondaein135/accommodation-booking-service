@@ -1,0 +1,17 @@
+FROM golang:1.21.2
+
+WORKDIR /app
+
+COPY booking-service/go.mod booking-service/go.sum ./
+
+RUN go mod download
+
+COPY shared/proto/ ./proto/
+
+COPY booking-service/ ./
+
+RUN go build -o main .
+
+EXPOSE 50051
+
+CMD ["/app/main"]
