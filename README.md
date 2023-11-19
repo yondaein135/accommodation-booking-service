@@ -5,13 +5,14 @@ The application is running on a 64bit system
 
 <h1>Notes</h1>
 <li>
-Run the application using ./run.sh
+Run the application using ./run.sh. Once the db finished booting, the microservices will take care of defining the models.
+You can track their progress on the console.
 </li>
 <li>
-Once you start up the db, insert some dummy data in by running the dummy.sql file in the root directory
+Once the db is set up and models are in place, insert some dummy data in by running the dummy.sql file in the root directory
 </li>
 <li>
-You can print the booking history to the console by calling the GetBookingHistory handler on port 50052 (booking service)
+You can print the booking history to the console by calling the GetBookingHistory handler on port 50052 (booking service), as per the requirements.
 </li>
 
 
